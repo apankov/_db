@@ -1,0 +1,9 @@
+# Please create DB configration file with your credentials.
+# You can use db.conf.example as template:
+# cp db.conf.example db.conf
+
+DBNAME=name
+DBUSER=root
+DBPASS=root
+DBDUMP=dump.sql
+DBHOST=localhost
