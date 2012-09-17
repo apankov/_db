@@ -11,7 +11,7 @@ Copy `_db` into some place (usually inside your project directory).
 
 Create config for the tools by copying provided default config `db.conf.example` into `db.conf`
 
-    <code>cp db.conf.example db.conf</code>
+    cp db.conf.example db.conf
 
 Update config by substituting your credentials.
 
