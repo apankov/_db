@@ -34,6 +34,14 @@ Tools description
 * `dump.sql` - default dump file
 
 
+Usage examples
+--------------
+
+`./dbpatch.sh diffs/users.sql`
+
+`echo 'select * from users' | ./dbconsole.sh`
+
+
 Credits
 -------
 
