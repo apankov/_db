@@ -1,11 +1,11 @@
 #!/bin/sh
 
-DIR=`dirname $0`
+DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 DBCONF=$DIR/db.conf
 
 if [ ! -f $DBCONF ]; then
     echo "unable to open config file $DBCONF"
-    exit
+    exit 1
 fi
 
 . $DBCONF
@@ -15,12 +15,12 @@ DBPATCH=''
 
 if [ -z $1 ]; then
     echo "Please specify patch file"
-    exit 1
+    exit 2
 fi
 
 if [ ! -f $1 ]; then
     echo "$1 doesn't exist, please correct"
-    exit 2
+    exit 3
 fi
 
 DBPATCH=$1

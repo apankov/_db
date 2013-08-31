@@ -1,11 +1,11 @@
 #!/bin/sh
 
-DIR=`dirname $0`
+DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 DBCONF=$DIR/db.conf
 
 if [ ! -f $DBCONF ]; then
     echo "unable to open config file $DBCONF"
-    exit
+    exit 1
 fi
 
 . $DBCONF

@@ -5,5 +5,5 @@
 DBNAME=name
 DBUSER=root
 DBPASS=root
-DBDUMP=dump.sql
 DBHOST=localhost
+DBDUMP=$DIR/dump.sql
