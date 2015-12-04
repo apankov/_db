@@ -9,12 +9,22 @@ if [ ! -f $DBCONF ]; then
 fi
 
 . $DBCONF
+. $DIR/lib.sh
 
 
 if [ ! -z $1 ]; then
     DBDUMP=$1
 fi
 
-mysqldump --skip-opt --add-drop-table --routines --disable-add-locks \
-    --create-options --quick --set-charset --disable-keys \
-    $DBNAME -u$DBUSER -p$DBPASS -h$DBHOST > $DBDUMP
+
+
+DUMP_DIR="$( cd -P "$( dirname ${DBDUMP} )" && pwd )"
+DUMP_FILE="$( basename ${DBDUMP} )"
+DBDUMP="${DUMP_DIR}/${DUMP_FILE}"
+
+
+cmd="mysqldump -h${DBHOST} -u${DBUSER} -p${DBPASS} ${DBNAME} "
+cmd="${cmd} --skip-opt --add-drop-table --routines --disable-add-locks"
+cmd="${cmd} --create-options --quick --set-charset --disable-keys > $DBDUMP"
+echo $cmd
+run_mysql_cmd "${cmd}" "-v ${DUMP_DIR}:${DUMP_DIR}"

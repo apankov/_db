@@ -4,17 +4,18 @@ DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 DBCONF=$DIR/db.conf
 
 if [ ! -f $DBCONF ]; then
-    echo "unable to open config file $DBCONF"
+    echo "unable to open config file ${DBCONF}"
     exit 1
 fi
 
 . $DBCONF
+. $DIR/lib.sh
 
 
 DBPATCH=''
 
 if [ -z $1 ]; then
-    echo "Please specify patch file"
+    echo 'Please specify patch file'
     exit 2
 fi
 
@@ -25,5 +26,11 @@ fi
 
 DBPATCH=$1
 
-echo -n "Applying patch $DBPATCH ... "
-mysql -u$DBUSER -p$DBPASS -h$DBHOST --default-character-set=utf8 $DBNAME < $DBPATCH && echo "done"
+PATCH_DIR="$( cd -P "$( dirname ${DBPATCH} )" && pwd )"
+PATCH_FILE="$( basename ${DBPATCH} )"
+DBPATCH="${PATCH_DIR}/${PATCH_FILE}"
+
+
+echo "Applying patch ${DBPATCH} ..."
+cmd="${MYSQL_CMD} ${DBNAME} < ${DBPATCH}"
+run_mysql_cmd "${cmd}" "-v ${PATCH_DIR}:${PATCH_DIR}"

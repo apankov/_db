@@ -4,6 +4,10 @@
 
 DBNAME=name
 DBUSER=root
-DBPASS=root
+DBPASS='pass!@#$1234'
 DBHOST=localhost
 DBDUMP=$DIR/dump.sql
+
+# Specify Docker container name in case your mysql is running in Docker container.
+# For example that could be 'mysqld'
+DOCKER_MYSQLD_CONTAINER=
