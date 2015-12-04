@@ -8,6 +8,13 @@ DBPASS='pass!@#$1234'
 DBHOST=localhost
 DBDUMP=$DIR/dump.sql
 
+# Docker
+#
 # Specify Docker container name in case your mysql is running in Docker container.
 # For example that could be 'mysqld'
 DOCKER_MYSQLD_CONTAINER=
+
+# Uncomment lines below to use host address, port and root password defined inside container.
+# DBHOST='$MYSQL_PORT_3306_TCP_ADDR'
+# DBPORT='$MYSQL_PORT_3306_TCP_PORT'
+# DBPASS='$MYSQL_ENV_MYSQL_ROOT_PASSWORD'

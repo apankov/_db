@@ -17,8 +17,18 @@ Create config for the tools by copying provided default config `db.conf.example`
 
 Update config by substituting your credentials.
 
+
+Docker
+------
+
 If your MySQL server is running inside Docker container, you have to specify container name, for instance:
 `DOCKER_MYSQLD_CONTAINER=mysqld`
+
+It could be helpful to use MySQL server host address, port and root's password defined by environmental variables in the container. To do so one can use following params in config file `db.conf`:
+
+    DBHOST='$MYSQL_PORT_3306_TCP_ADDR'
+    DBPORT='$MYSQL_PORT_3306_TCP_PORT'
+    DBPASS='$MYSQL_ENV_MYSQL_ROOT_PASSWORD'
 
 
 Tools description
@@ -47,6 +57,7 @@ Usage examples
 `./dbpatch.sh diffs/migration-users-roles.sql`
 
 `echo 'select count(*) from users' | ./dbconsole.sh`
+
 (it wouldn't work if you use Docker)
 
 `./dbconsole.sh -e 'select count(*) from users'`
