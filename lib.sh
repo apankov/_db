@@ -14,4 +14,8 @@ run_mysql_cmd() {
     fi
 }
 
-MYSQL_CMD="mysql -h${DBHOST} -u${DBUSER} -p${DBPASS} --default-character-set=utf8"
+port=''
+if [ "${DBPORT}" ]; then
+    port=" -P${DBPORT}"
+fi
+MYSQL_CMD="mysql -h${DBHOST} ${port} -u${DBUSER} -p${DBPASS} --default-character-set=utf8"
