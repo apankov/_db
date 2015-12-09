@@ -10,7 +10,7 @@ run_mysql_cmd() {
     if [ $DOCKER_MYSQLD_CONTAINER ]; then
         docker_run "${cmd}" "${mapping}"
     else
-        `$cmd`
+        bash -c "$cmd"
     fi
 }
 
