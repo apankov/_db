@@ -13,6 +13,9 @@ DBDUMP=$DIR/dump.sql
 # Specify Docker container name in case your mysql is running in Docker container.
 # For example that could be 'mysqld'
 DOCKER_MYSQLD_CONTAINER=
+DOCKER_NETWORK=
+
+DOCKER_COMPOSE_SERVICE=
 
 # Uncomment lines below to use host address, port and root password defined inside container.
 # DBHOST='$MYSQL_PORT_3306_TCP_ADDR'
