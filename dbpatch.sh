@@ -32,5 +32,19 @@ DBPATCH="${PATCH_DIR}/${PATCH_FILE}"
 
 
 echo "Applying patch ${DBPATCH} ..."
-cmd="${MYSQL_CMD} ${DBNAME} < ${DBPATCH}"
-run_mysql_cmd "${cmd}" "-v ${PATCH_DIR}:${PATCH_DIR}"
+clientCmd="${MYSQL_CMD} ${DBNAME}"
+cmd="${clientCmd} < ${DBPATCH}"
+
+
+if [ $DOCKER_MYSQLD_CONTAINER ]; then
+    network=''
+    if [ $DOCKER_NETWORK ]; then
+        network="--net $DOCKER_NETWORK"
+    fi
+    cat ${DBPATCH} | docker exec -i $DOCKER_MYSQLD_CONTAINER sh -c "${clientCmd}"
+elif [ $DOCKER_COMPOSE_SERVICE ]; then
+    fullcmd="docker-compose exec $DOCKER_COMPOSE_SERVICE $cmd"
+    sh -c "$fullcmd"
+else
+    bash -c "$cmd"
+fi
